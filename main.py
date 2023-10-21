@@ -6,11 +6,17 @@ def main():
     cred_file = "credentials.json"
     email, password = utils.get_creds(cred_file)
 
-    recipient = "Maarij Ahmed Khan"
+    recipient = "Jordan Anthus"
     message = """
-Hello Maarij!
-How are you.
-I hope you are doing fine.
+Hi Jordan,
+
+This message is generated automatically using a script. The script sends message automatically to a Linkedin user.
+I have attached the Github link for this script below.
+
+Link: https://github.com/InfiniteLoopify/linkedin-automated-message
+
+Regards,
+Umair Shahab
 """
 
     scraper = LinkedinScraper()
