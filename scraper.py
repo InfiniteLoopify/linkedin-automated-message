@@ -1,4 +1,5 @@
 import time
+import traceback
 
 from fake_useragent import UserAgent
 
@@ -78,7 +79,7 @@ class LinkedinScraper:
             sign_in.click()
             time.sleep(1)
         except Exception as e:
-            return
+            print(traceback.format_exc())
 
     def send_message(self, recipient: str, message: str):
         if not self.driver:
@@ -89,31 +90,35 @@ class LinkedinScraper:
             self.driver.get(link)
             self.driver.implicitly_wait(6)
 
-            time.sleep(2)
+            time.sleep(3)
 
             search_name = self.driver.find_element(
-                By.XPATH, '//input[@id="ember150-search-field"]'
+                By.XPATH,
+                '//input[contains(@class, "msg-connections-typeahead__search-field")]',
             )
-            search_name.send_keys(recipient)
-
+            for name_part in recipient.split():
+                search_name.send_keys(f"{name_part} ")
+                time.sleep(1)
             time.sleep(2)
 
             search_name.send_keys(Keys.RETURN)
             message_box = self.driver.find_element(
-                By.XPATH, '//form[@id="msg-form-ember124"]/div[3]/div/div[1]/div[1]/p'
+                By.XPATH,
+                '//form[contains(@class, "msg-form")]/div[3]/div/div[1]/div[1]/p',
             )
             message_box.send_keys(message)
-            time.sleep(2)
+            time.sleep(3)
 
             send_button = self.driver.find_element(
-                By.XPATH, '//form[@id="msg-form-ember124"]/footer/div[2]/div[1]/button'
+                By.XPATH,
+                '//form[contains(@class, "msg-form")]/footer/div[2]/div[1]/button',
             )
             send_button.click()
 
             time.sleep(8)
 
         except Exception as e:
-            return
+            print(traceback.format_exc())
 
     def logout(self):
         if not self.driver:
@@ -125,4 +130,4 @@ class LinkedinScraper:
             self.driver.implicitly_wait(4)
             time.sleep(4)
         except Exception as e:
-            return
+            print(traceback.format_exc())
