@@ -17,28 +17,28 @@ class LinkedinScraper:
         self.driver = self._get_driver()
 
     def _get_driver(self):
-        ua = UserAgent()
-        random_agent = ua.random
-        fixed_agent = """Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"""
+        ua = UserAgent()  # 1
+        random_agent = ua.random  # 1
+        fixed_agent = """Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"""  # 1
 
-        options = webdriver.ChromeOptions()
-        options.add_argument("start-maximized")
+        options = webdriver.ChromeOptions()  # 1
+        options.add_argument("start-maximized")  # 1
 
-        options.add_argument(f"user-agent={fixed_agent}")
+        options.add_argument(f"user-agent={fixed_agent}")  # 1
         # options.add_argument(f"user-agent={random_agent}")
-        options.add_argument("disable-infobars")
-        options.add_argument("--disable-extensions")
-        options.add_argument("--disable-gpu")
-        options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--incognito")
+        options.add_argument("disable-infobars")  # 1
+        options.add_argument("--disable-extensions")  # 1
+        options.add_argument("--disable-gpu")  # 1
+        options.add_argument("--disable-dev-shm-usage")  # 1
+        options.add_argument("--no-sandbox")  # 1
+        options.add_argument("--incognito")  # 1
         # options.add_argument("--headless")
 
-        options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        options.add_experimental_option("useAutomationExtension", False)
+        options.add_experimental_option("excludeSwitches", ["enable-automation"])  # 1
+        options.add_experimental_option("useAutomationExtension", False)  # 1
 
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=options)
+        service = Service(ChromeDriverManager().install())  # 1
+        driver = webdriver.Chrome(service=service, options=options)  # 1
 
         stealth(
             driver,
@@ -48,10 +48,10 @@ class LinkedinScraper:
             webgl_vendor="Intel Inc.",
             renderer="Intel Iris OpenGL Engine",
             fix_hairline=True,
-        )
+        )  # 1
 
-        driver.implicitly_wait(4)
-        driver.maximize_window()
+        driver.implicitly_wait(4)  # 1
+        driver.maximize_window()  # 1
         return driver
 
     def login(self, email: str, password: str):
