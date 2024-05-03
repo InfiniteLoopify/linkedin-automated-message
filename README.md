@@ -68,7 +68,7 @@
 
 Login to your Linkedin using your credentials, send message to a recipient, and then logout, all done automatically! 
 
-![Screenshot](images/screenshot.png)
+<!-- ![Screenshot](images/screenshot.png) -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
