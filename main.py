@@ -1,27 +1,26 @@
-from scraper import LinkedinScraper
-import utils
+import os
+from dotenv import load_dotenv
+
+from messenger import LinkedinMessenger
+
+load_dotenv()
+
+
+RECIPIENT = "John Doe"
+MESSAGE = """
+Hello John,
+I am sending you this message through LinkedIn.
+Best Regards.
+"""
 
 
 def main():
-    cred_file = "credentials.json"
-    email, password = utils.get_creds(cred_file)
+    EMAIL = os.getenv("LINKEDIN_EMAIL", "")
+    PASSWORD = os.getenv("LINKEDIN_PASSWORD", "")
 
-    recipient = "Jordan Anthus"
-    message = """
-Hi Jordan,
-
-This message is generated automatically using a script. The script sends message automatically to a Linkedin user.
-I have attached the Github link for this script below.
-
-Link: https://github.com/InfiniteLoopify/linkedin-automated-message
-
-Regards,
-Umair Shahab
-"""
-
-    scraper = LinkedinScraper()
-    scraper.login(email=email, password=password)
-    scraper.send_message(recipient=recipient, message=message)
+    scraper = LinkedinMessenger()
+    scraper.login(email=EMAIL, password=PASSWORD)
+    scraper.send_message(recipient=RECIPIENT, message=MESSAGE)
     scraper.logout()
 
 
